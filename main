@@ -1,0 +1,75 @@
+class Product:
+    def __init__(self, name, quantity, price):
+        self.name = name
+        self.quantity = quantity
+        self.price = price
+
+class Inventory:
+    def __init__(self):
+        self.products = []
+
+    def add_product(self, product):
+        self.products.append(product)
+        print(f"{product.name} added to inventory.")
+
+    def remove_product(self, product):
+        self.products.remove(product)
+        print(f"{product.name} removed from inventory.")
+
+    def search_product(self, name):
+        for product in self.products:
+            if product.name == name:
+                return product
+        print(f"{name} not found in inventory.")
+        return None
+
+    def update_quantity(self, product, quantity):
+        product.quantity = quantity
+        print(f"Quantity of {product.name} updated to {quantity}.")
+
+    def update_price(self, product, price):
+        product.price = price
+        print(f"Price of {product.name} updated to {price}.")
+
+    def display_inventory(self):
+        if len(self.products) == 0:
+            print("Inventory is empty.")
+        else:
+            print("Inventory:")
+            for product in self.products:
+                print(f"Name: {product.name}, Quantity: {product.quantity}, Price: {product.price}")
+
+
+# Example usage
+inventory = Inventory()
+
+# Add products to inventory
+product1 = Product("Apple", 10, 0.5)
+inventory.add_product(product1)
+
+product2 = Product("Banana", 5, 0.3)
+inventory.add_product(product2)
+
+product3 = Product("Orange", 3, 0.2)
+inventory.add_product(product3)
+
+# Display inventory
+inventory.display_inventory()
+
+# Update quantity of a product
+product = inventory.search_product("Apple")
+if product:
+    inventory.update_quantity(product, 15)
+
+# Update price of a product
+product = inventory.search_product("Banana")
+if product:
+    inventory.update_price(product, 0.35)
+
+# Remove a product from inventory
+product = inventory.search_product("Orange")
+if product:
+    inventory.remove_product(product)
+
+# Display inventory again
+inventory.display_inventory()
